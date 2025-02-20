@@ -1,10 +1,10 @@
 
-from chatlib.chatbot import DialogueTurn
-from chatlib.chatbot.generators import ChatGPTResponseGenerator, StateBasedResponseGenerator
-from chatlib.utils.jinja_utils import convert_to_jinja_template
-from chatlib.tool.versatile_mapper import DialogueSummarizer, Dialogue, DialogueTurn, MapperInputOutputPair
-from chatlib.llm.integration.openai_api import GPTChatCompletionAPI
-from chatlib.tool.converter import generate_pydantic_converter
+from chatlib.chatlib.chatbot import DialogueTurn
+from chatlib.chatlib.chatbot.generators import ChatGPTResponseGenerator, StateBasedResponseGenerator
+from chatlib.chatlib.utils.jinja_utils import convert_to_jinja_template
+from chatlib.chatlib.tool.versatile_mapper import DialogueSummarizer, Dialogue, DialogueTurn, MapperInputOutputPair
+from chatlib.chatlib.llm.integration.openai_api import GPTChatCompletionAPI
+from chatlib.chatlib.tool.converter import generate_pydantic_converter
 
 from app.common import FindDialogueSummarizerParams, FindSummarizerResult, PromptFactory, SPECIAL_TOKEN_CONFIG
 
@@ -21,7 +21,7 @@ def create_generator():
 - Do not overly suggest a specific solution.
  
 {PromptFactory.get_speaking_rules_block()}
-"""), special_tokens=SPECIAL_TOKEN_CONFIG
+"""),special_tokens=SPECIAL_TOKEN_CONFIG
     )
 
 

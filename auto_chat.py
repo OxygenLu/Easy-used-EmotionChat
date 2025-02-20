@@ -2,16 +2,16 @@ import asyncio
 from os import path, getcwd, getenv
 
 import openai
-from chatlib.utils.validator import make_non_empty_string_validator
-from chatlib.chatbot.generators import ChatGPTResponseGenerator
-from chatlib.llm.integration.openai_api import ChatGPTModel
+from chatlib.chatlib.utils.validator import make_non_empty_string_validator
+from chatlib.chatlib.chatbot.generators import ChatGPTResponseGenerator
+from chatlib.chatlib.llm.integration.openai_api import ChatGPTModel
 from dotenv import load_dotenv
 from questionary import prompt
 
 from app.common import ChatbotLocale
 from app.response_generator import EmotionChatbotResponseGenerator
-from chatlib.utils import cli
-from chatlib.global_config import GlobalConfig
+from chatlib.chatlib.utils import cli
+from chatlib.chatlib.global_config import GlobalConfig
 
 if __name__ == "__main__":
     # Init OpenAI API
@@ -52,7 +52,10 @@ if __name__ == "__main__":
         raise ValueError("Unsupported locale.")
 
     asyncio.run(cli.run_auto_chat_loop(
-        EmotionChatbotResponseGenerator(user_name=user_name, user_age=user_age, locale=locale, verbose=True),
+        EmotionChatbotResponseGenerator(user_name=user_name, 
+                                        user_age=user_age, 
+                                        locale=locale, 
+                                        verbose=True),
         ChatGPTResponseGenerator(base_instruction=f"""
 You are a {user_age}-year-old {locale_name} child named {user_name}.            
 [Speaking Rules]
@@ -61,6 +64,6 @@ You are a {user_age}-year-old {locale_name} child named {user_name}.
 3. Do not ask question unless you do not understand certain emotion words.
 4. When asked about the day, say that you had a bit of hard time today, becasue your mom had you do your math homework by yourself. But you're not really good at math, so you got in trouble with her.
 5. You are struggling with naming your emotion regarding the case.
-""", model=ChatGPTModel.GPT_4o),
+""", model=ChatGPTModel.GPT_3_5_latest),
         max_turns=30
     ))

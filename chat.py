@@ -3,23 +3,28 @@ import asyncio
 from os import path, getcwd, getenv
 
 import openai
-from chatlib.utils.validator import make_non_empty_string_validator
-from chatlib.chatbot import TurnTakingChatSession
+from chatlib.chatlib.llm.integration.openai_api import ChatGPTModel
+from chatlib.chatlib.utils.validator import make_non_empty_string_validator
+from chatlib.chatlib.chatbot import TurnTakingChatSession
 from dotenv import load_dotenv
 from questionary import prompt
+from chatlib.chatlib.chatbot.generators import ChatGPTResponseGenerator
 
 from app.common import ChatbotLocale
 from app.response_generator import EmotionChatbotResponseGenerator
-from chatlib.utils import cli
-from chatlib.global_config import GlobalConfig
+from chatlib.chatlib.utils import cli
+from chatlib.chatlib.global_config import GlobalConfig
 
 if __name__ == "__main__":
+
+    openai.base_url ="https://api.v3.cm/v1/" # your own api
 
     GlobalConfig.is_cli_mode = True
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('-session', '--session', dest="session", type=str, help='Session ID to restore chat')
+    parser.add_argument('-session', '--session', dest="session", type=str, 
+                        help='Session ID to restore chat')
 
     parser.set_defaults(session=None)
 
@@ -33,7 +38,7 @@ if __name__ == "__main__":
     else:
 
         configuration_questions = [
-            {
+            {   
                 'type': 'text',
                 'name': 'user_name',
                 'message': "Please enter child's name:",

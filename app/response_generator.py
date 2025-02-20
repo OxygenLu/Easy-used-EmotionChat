@@ -1,8 +1,8 @@
-from chatlib.utils import dict_utils
-from chatlib.chatbot import ResponseGenerator, Dialogue, dialogue_utils
-from chatlib.chatbot.generators import ChatGPTResponseGenerator, StateBasedResponseGenerator, StateType
-from chatlib.chatbot.dialogue_to_csv import DialogueCSVWriter, TurnValueExtractor
-from chatlib.chatbot.message_transformer import SpecialTokenExtractionTransformer
+from chatlib.chatlib.utils import dict_utils
+from chatlib.chatlib.chatbot import ResponseGenerator, Dialogue, dialogue_utils
+from chatlib.chatlib.chatbot.generators import ChatGPTResponseGenerator, StateBasedResponseGenerator, StateType
+from chatlib.chatlib.chatbot.dialogue_to_csv import DialogueCSVWriter, TurnValueExtractor
+from chatlib.chatlib.chatbot.message_transformer import SpecialTokenExtractionTransformer
 
 from app.common import EmotionChatbotPhase, SPECIAL_TOKEN_REGEX, SPECIAL_TOKEN_CONFIG, ChatbotLocale, FindDialogueSummarizerParams
 import app.common
@@ -72,13 +72,16 @@ class EmotionChatbotResponseGenerator(StateBasedResponseGenerator[EmotionChatbot
         generator = self.__generators[state]
 
         if state == EmotionChatbotPhase.Explore:
-            generator.update_instruction_parameters(dict(user_name=self.__user_name, user_age=self.__user_age,
-                                                         locale=self.__locale,
-                                                         revisited=True if payload is not None and payload[
+            generator.update_instruction_parameters(
+                dict(user_name=self.__user_name, 
+                     user_age=self.__user_age,
+                     locale=self.__locale,
+                     evisited=True if payload is not None and payload[
                                                              "revisited"] is True else False))
         elif state == EmotionChatbotPhase.Label:
             generator.update_instruction_parameters(dict(**payload, locale=self.__locale))  # Put the result of rapport conversation
-        elif state in [EmotionChatbotPhase.Find, EmotionChatbotPhase.Share, EmotionChatbotPhase.Record]:
+        elif state in [EmotionChatbotPhase.Find, EmotionChatbotPhase.Share,
+                      EmotionChatbotPhase.Record]:
             generator.update_instruction_parameters(
                 dict(key_episode=self._get_memoized_payload(EmotionChatbotPhase.Explore)["key_episode"],
                      identified_emotions=self._get_memoized_payload(EmotionChatbotPhase.Label)["identified_emotions"],
@@ -121,9 +124,11 @@ class EmotionChatbotResponseGenerator(StateBasedResponseGenerator[EmotionChatbot
         # Label --> Find OR Record
         elif current == EmotionChatbotPhase.Label:
             print("Current AI turns: ", len(current_state_ai_turns))
-            summarizer_result = await label.summarizer.run(label.summarizer_examples, dialog, app.common.LabelDialogueSummarizerParams(
-                                                               key_episode=self._get_memoized_payload(
-                                                                   EmotionChatbotPhase.Explore)[
+            summarizer_result = \
+                await label.summarizer.run(label.summarizer_examples, 
+                                            dialog, app.common.LabelDialogueSummarizerParams(
+                                            key_episode=self._get_memoized_payload(
+                                            EmotionChatbotPhase.Explore)[
                                                                    "key_episode"],
                                                                user_emotion=self._get_memoized_payload(
                                                                    EmotionChatbotPhase.Explore)[

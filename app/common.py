@@ -1,8 +1,8 @@
 from enum import StrEnum
 
-from chatlib.chatbot import ChatCompletionParams
-from chatlib.tool.versatile_mapper import ChatCompletionFewShotMapperParams
-from chatlib.llm.integration.openai_api import ChatGPTModel
+from chatlib.chatlib.chatbot import ChatCompletionParams
+from chatlib.chatlib.tool.versatile_mapper import ChatCompletionFewShotMapperParams
+from chatlib.chatlib.llm.integration.openai_api import ChatGPTModel
 from pydantic import BaseModel
 
 class ChatbotLocale(StrEnum):

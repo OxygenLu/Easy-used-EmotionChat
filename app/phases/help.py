@@ -1,8 +1,8 @@
-from chatlib.utils.jinja_utils import convert_to_jinja_template
-from chatlib.chatbot.generators import ChatGPTResponseGenerator, StateBasedResponseGenerator
-from chatlib.tool.versatile_mapper import DialogueSummarizer, ChatCompletionParams, ChatCompletionFewShotMapperParams
-from chatlib.llm.integration.openai_api import ChatGPTModel, GPTChatCompletionAPI
-from chatlib.tool.converter import generate_pydantic_converter
+from chatlib.chatlib.utils.jinja_utils import convert_to_jinja_template
+from chatlib.chatlib.chatbot.generators import ChatGPTResponseGenerator, StateBasedResponseGenerator
+from chatlib.chatlib.tool.versatile_mapper import DialogueSummarizer, ChatCompletionParams, ChatCompletionFewShotMapperParams
+from chatlib.chatlib.llm.integration.openai_api import ChatGPTModel, GPTChatCompletionAPI
+from chatlib.chatlib.tool.converter import generate_pydantic_converter
 
 from app.common import HelpSummarizerResult, PromptFactory
 
@@ -37,6 +37,6 @@ Follow this JSON format:
 )
 
 summarizer_params = ChatCompletionFewShotMapperParams(
-    model=ChatGPTModel.GPT_4o,
+    model=ChatGPTModel.GPT_3_5_latest,
     api_params = ChatCompletionParams(temperature = 0.5)
 )

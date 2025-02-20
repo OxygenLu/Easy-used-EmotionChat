@@ -1,11 +1,11 @@
 import json
 
-from chatlib.chatbot import DialogueTurn, RegenerateRequestException
-from chatlib.chatbot.generators import ChatGPTResponseGenerator, StateBasedResponseGenerator
-from chatlib.utils.jinja_utils import convert_to_jinja_template
-from chatlib.tool.versatile_mapper import DialogueSummarizer, Dialogue, DialogueTurn, MapperInputOutputPair
-from chatlib.tool.converter import generate_pydantic_converter
-from chatlib.llm.integration.openai_api import GPTChatCompletionAPI
+from chatlib.chatlib.chatbot import DialogueTurn, RegenerateRequestException
+from chatlib.chatlib.chatbot.generators import ChatGPTResponseGenerator, StateBasedResponseGenerator
+from chatlib.chatlib.utils.jinja_utils import convert_to_jinja_template
+from chatlib.chatlib.tool.versatile_mapper import DialogueSummarizer, Dialogue, DialogueTurn, MapperInputOutputPair
+from chatlib.chatlib.tool.converter import generate_pydantic_converter
+from chatlib.chatlib.llm.integration.openai_api import GPTChatCompletionAPI
 
 from app.common import FindDialogueSummarizerParams, PromptFactory, SPECIAL_TOKEN_CONFIG, RecordSummarizerResult
 

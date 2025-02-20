@@ -1,13 +1,13 @@
 import json
 from os import getcwd, path
 
-from chatlib.chatbot import Dialogue, DialogueTurn, RegenerateRequestException
-from chatlib.chatbot.generators import ChatGPTResponseGenerator, StateBasedResponseGenerator
-from chatlib.utils.jinja_utils import convert_to_jinja_template
+from chatlib.chatlib.chatbot import Dialogue, DialogueTurn, RegenerateRequestException
+from chatlib.chatlib.chatbot.generators import ChatGPTResponseGenerator, StateBasedResponseGenerator
+from chatlib.chatlib.utils.jinja_utils import convert_to_jinja_template
 # Help the user label their emotion based on the Wheel of Emotions. Empathize their emotion.
-from chatlib.tool.versatile_mapper import DialogueSummarizer, MapperInputOutputPair
-from chatlib.llm.integration.openai_api import ChatGPTModel, GPTChatCompletionAPI
-from chatlib.tool.converter import generate_pydantic_converter
+from chatlib.chatlib.tool.versatile_mapper import DialogueSummarizer, MapperInputOutputPair
+from chatlib.chatlib.llm.integration.openai_api import ChatGPTModel, GPTChatCompletionAPI
+from chatlib.chatlib.tool.converter import generate_pydantic_converter
 
 from app.common import EmotionChatbotSpecialTokens, PromptFactory, SPECIAL_TOKEN_CONFIG
 from app.common import LabeledEmotionInfo

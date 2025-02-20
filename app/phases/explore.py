@@ -1,9 +1,9 @@
-from chatlib.chatbot import DialogueTurn, ChatCompletionParams
-from chatlib.chatbot.generators import ChatGPTResponseGenerator, StateBasedResponseGenerator
-from chatlib.utils.jinja_utils import convert_to_jinja_template
-from chatlib.llm.integration.openai_api import GPTChatCompletionAPI, ChatGPTModel
-from chatlib.tool.versatile_mapper import DialogueSummarizer, MapperInputOutputPair, ChatCompletionFewShotMapperParams
-from chatlib.tool.converter import generate_pydantic_converter
+from chatlib.chatlib.chatbot import DialogueTurn, ChatCompletionParams
+from chatlib.chatlib.chatbot.generators import ChatGPTResponseGenerator, StateBasedResponseGenerator
+from chatlib.chatlib.utils.jinja_utils import convert_to_jinja_template
+from chatlib.chatlib.llm.integration.openai_api import GPTChatCompletionAPI, ChatGPTModel
+from chatlib.chatlib.tool.versatile_mapper import DialogueSummarizer, MapperInputOutputPair, ChatCompletionFewShotMapperParams
+from chatlib.chatlib.tool.converter import generate_pydantic_converter
 from pydantic import BaseModel
 
 from app.common import PromptFactory, SPECIAL_TOKEN_CONFIG
@@ -41,7 +41,8 @@ For each conversation turn, execute one task only.
 - Ask the user about an episode or  moment that is the most memorable to him or her.
 - If he or she does not remember or know what to say, ask them about an event when he or she enjoyed it or felt good or bad.
 
-""" + PromptFactory.get_speaking_rules_block()), special_tokens=SPECIAL_TOKEN_CONFIG, model=ChatGPTModel.GPT_4o)
+""" + PromptFactory.get_speaking_rules_block()), special_tokens=SPECIAL_TOKEN_CONFIG, 
+            model=ChatGPTModel.GPT_3_5_latest)
 
         self.__initial_user_message_format = convert_to_jinja_template("""
 {%-if locale == 'kr'-%}

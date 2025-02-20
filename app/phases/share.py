@@ -1,10 +1,10 @@
-from chatlib.utils import dict_utils
-from chatlib.chatbot import Dialogue, DialogueTurn, dialogue_utils
-from chatlib.chatbot.generators import ChatGPTResponseGenerator, StateBasedResponseGenerator
-from chatlib.utils.jinja_utils import convert_to_jinja_template
-from chatlib.tool.versatile_mapper import DialogueSummarizer
-from chatlib.llm.integration.openai_api import ChatGPTModel, GPTChatCompletionAPI
-from chatlib.tool.converter import generate_pydantic_converter
+from chatlib.chatlib.utils import dict_utils
+from chatlib.chatlib.chatbot import Dialogue, DialogueTurn, dialogue_utils
+from chatlib.chatlib.chatbot.generators import ChatGPTResponseGenerator, StateBasedResponseGenerator
+from chatlib.chatlib.utils.jinja_utils import convert_to_jinja_template
+from chatlib.chatlib.tool.versatile_mapper import DialogueSummarizer
+from chatlib.chatlib.llm.integration.openai_api import ChatGPTModel, GPTChatCompletionAPI
+from chatlib.chatlib.tool.converter import generate_pydantic_converter
 
 from app.common import EmotionChatbotSpecialTokens, FindDialogueSummarizerParams, PromptFactory, \
     SPECIAL_TOKEN_CONFIG, ShareSummarizerResult
